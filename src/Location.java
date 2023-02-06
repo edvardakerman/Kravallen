@@ -1,9 +1,9 @@
 import java.util.*;
 
-public abstract class Location {
+public class Location {
     private String Name;
     private String Description;
-    private ArrayList<Item> items = new ArrayList<Item>();
+    protected ArrayList<Item> items = new ArrayList<Item>();
     private Boolean visited = false;
     private Location[] paths = new Location[4];
 
@@ -51,7 +51,13 @@ public abstract class Location {
     }
 
     public String describeYourself(){
-        return this.Description;
+    	int index = this.Description.indexOf(",");
+    	if (this.visited) {
+    		return this.Description.substring(0, index);
+    	} else {
+    		return this.Description;
+    	}
+        
     }
     
         

@@ -15,6 +15,6 @@ abstract class Item {
         return this.description;
     }
     
-    // doCommand ??
+    public abstract void use();
     
 }

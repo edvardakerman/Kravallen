@@ -11,6 +11,7 @@ class Party extends Location {
 		if(pos instanceof Party) {
 			System.out.println("CHACHACHA");
 		}
+		
 	}
 	
 	public void setRequiredItem(Item req) {
@@ -32,8 +33,8 @@ class Party extends Location {
 	
 	public static void getMusic(Location pos) {
 		if (pos instanceof Party) {
-			String Music[] = new String[] { "Mares", "Avicii", "Lov1", "Bolaget" };		 
-			 System.out.println(Music[(int) Math.floor(Math.random()*Music.length)] + " spelas högt!!!");
+			String Music[] = new String[] { "Mares", "Avicii", "Lov1", "Bolaget" };
+			System.out.println(Music[(int) Math.floor(Math.random()*Music.length)] + " spelas högt!!!");
 		}
 
 	}

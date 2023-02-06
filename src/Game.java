@@ -10,7 +10,7 @@ class Game {
 	    locations = new ArrayList<>();
 	    
 	    // Create Rooms
-	    Home Ryd = new Home("Ryd", "Välkommen hem till din korre i ryd, tyvärr är detta dit hem.");
+	    Location Ryd = new Location("Ryd", "Välkommen hem till din korre i ryd, tyvärr är detta dit hem.");
 	    Store Systemet = new Store("Systembolaget", "Välkommen till Systemet, Här handlar vi på oss viktiga förnödenheter inför kvällen.");
 	    Store Donken = new Store("Donken", "Välkommen till Donken, Här fyllekäkar vi efter episka kvällar på Kårallen");
 	    Party Karallen = new Party("Kårallen", "Välkommen till Kårallen, här har vi magiska kvällar!");
