@@ -32,7 +32,7 @@ public class Player {
     	} else {
             switch (arr[0]) {
             case "leta":
-                look();
+                this.Position.look();
                 break;
             case "hjälp":
             	help();
@@ -92,13 +92,6 @@ public class Player {
 	    	System.out.println(item.getName() + ", " + item.getDesc());
 		}
     }    
-    
-    void look(){
-    	System.out.println("letar..");
-    	for (Item item : this.Position.getItems()) {
-	    	System.out.println(item.getName());
-		}
-    }
     
     public Boolean playerHasAcces(Location newPos) {
 		if(newPos instanceof Party) {						

@@ -31,6 +31,13 @@ public abstract class Location {
     	return this.visited;
     }
     
+    void look(){
+    	System.out.println("letar..");
+    	for (Item item : this.items) {
+	    	System.out.println(item.getName());
+		}
+    }
+    
     public void setItem(Item item){
     	this.items.add(item);
     }
