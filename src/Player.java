@@ -59,9 +59,9 @@ public class Player {
     	}
     }
 
-    public Location getLocation(){
-        return this.Position;
-    }
+//    public Location getLocation(){
+//        return this.Position;
+//    }
     
     void help(){
     	System.out.println("Giltiga Kommandon:");
@@ -83,7 +83,9 @@ public class Player {
     			System.out.println(item.getName() + " laddes till bland dina saker.");
     		}
 		}
-    	this.Position.removeItem(this.items.get(this.items.size() - 1));
+    	if (!(this.Position instanceof Store)) {
+    		this.Position.removeItem(this.items.get(this.items.size() - 1));
+    	}	
     }
     
     void inventory(){
