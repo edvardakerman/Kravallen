@@ -5,8 +5,8 @@ class Wearable extends Item {
 	}
 
 	@Override
-	public void use() {
-		// TODO Auto-generated method stub
+	public void use(Player player) {
+		player.setOvve();
 		System.out.println("Du är nu klädd i " + this.getName());
 	}
 	

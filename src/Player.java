@@ -4,6 +4,8 @@ public class Player {
     private String Name;
     private Location Position;
     private ArrayList<Item> items = new ArrayList<Item>();
+    private double drunk = 0.0;
+    private Boolean wearingOvve = false;
     
     Player(String name, Location start){
         this.Name = name;
@@ -12,6 +14,25 @@ public class Player {
 
     public String getName(){
         return this.Name;
+    }
+    
+    public void setDrunk(Double db){
+        this.drunk += db;
+        if (this.drunk <= 0.0) {
+        	this.drunk = 0.0;
+        }
+    }
+    
+    public void setOvve() {
+    	this.wearingOvve = true;
+    }
+    
+    public Boolean getOvveStatus() {
+    	return this.wearingOvve;
+    }
+    
+    public Double getDrunk() {
+    	return this.drunk;
     }
     
     public void doCommand(String cmd){
@@ -66,7 +87,11 @@ public class Player {
     void useItem(String name) {
     	for (Item item : this.items) {
     		if (name.equals(item.getName())) {
-    			item.use();
+    			item.use(this);
+    			if (item instanceof Drink || item instanceof Food) {
+    				this.items.remove(item);
+    			}
+    			break;
     		}
 		}
     }
@@ -90,7 +115,13 @@ public class Player {
 		}
     }    
     
+    // Snygga till
+    // Komma t colonia: Kir
+    // Komma in på Karallen Alkoholnivå och Ovve
+    
+    
     public Boolean playerHasAcces(Location newPos) {
+    	
 		if(newPos instanceof Party) {						
 			if (((Party) newPos).getRequiredItem() != null) {			
 				if(((Party) newPos).playerHasItem(this.items)) {

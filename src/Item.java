@@ -15,6 +15,6 @@ abstract class Item {
         return this.description;
     }
     
-    public abstract void use();
+    public abstract void use(Player player);
     
 }

@@ -4,9 +4,10 @@ class Drink extends Item{
 	}
 	
 	@Override
-	public void use() {
-		// TODO Auto-generated method stub
+	public void use(Player player) {
+		player.setDrunk(0.5);
 		System.out.println("Klunk Klunk Klunk! Gott med " + this.getName() + "!!");
+		System.out.println("Din promille ligger nu på " + player.getDrunk());
 	}
 
 }
