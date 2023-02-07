@@ -10,12 +10,11 @@ class Game {
 	    locations = new ArrayList<>();
 	    
 	    // Create Rooms
-	    Location Ryd = new Location("Ryd", "Välkommen hem till din korre i ryd, tyvärr är detta dit hem.");
+	    Location Ryd = new Location("Ryd", "Välkommen hem till din korre, tyvärr är detta dit hem.");
 	    Store Systemet = new Store("Systembolaget", "Välkommen till Systemet, Här handlar vi på oss viktiga förnödenheter inför kvällen.");
-	    Store Donken = new Store("Donken", "Välkommen till Donken, Här fyllekäkar vi efter episka kvällar på Kårallen");
+	    Store Donken = new Store("Donken", "Välkommen till Donken, Här fyllekäkar vi efter episka kvällar på Kårallen.");
 	    Party Karallen = new Party("Kårallen", "Välkommen till Kårallen, här har vi magiska kvällar!");
 	    Party Colonia = new Party("Colonia", "Välkommen till Colonia, här förarar vi som galningar inför kvällar på Kårallen!");
-	  
 	    
 	    // Create Paths (North, East, South, West)
 	    Ryd.setPaths(null, Donken, null, null);
@@ -23,7 +22,6 @@ class Game {
 	    Systemet.setPaths(null, null, null, Donken);
 	    Colonia.setPaths(Donken, null, Karallen, null);
 	    Karallen.setPaths(Colonia, null, null, null);
-
 	    
 	    // Create Items
 	    Wearable Ovve = new Wearable("Ovve", "Snyggt");
@@ -41,8 +39,6 @@ class Game {
 	    
 	    // add to array
 	    locations.add(Ryd);
-	    
-	    Ryd.setLocToVisited();
     }
 
     public void run() {
@@ -51,14 +47,14 @@ class Game {
         System.out.println("Välkommen till Linkan\nVad är ditt namn?");
         name = keyboard.nextLine();
         player = new Player(name, locations.get(0));
-        System.out.println(name + ", du befinner dig just nu i Ryd då detta tyvärr är ditt hem. En korre i Ryd...\n"
-        		+ "Men det är torsdag och Kravall på Kårallen ikväll:) \nDet betyder att vi kan glömma våra omtentor och dränka vår ångest genom en magisk kväll!");
-        System.out.println("Kl är 18.00 och du måste skynda dig till systemet innan stägning!!! \nMen innan du begär dig iväg behöver du klä dig i dit favoritplagg...\n"
-        		+ "Ovven!! \nDin korre är stökig och du behöver därför leta runt... Prova komandot 'leta'");
-        
+        System.out.println(name + ", du befinner dig just nu vid " + player.getPosition().getName() + ", " + player.getPosition().describeYourself());
+        System.out.println("Men det är torsdag och det betyder Kravall på Kårallen ikväll:) \nDå kan vi glömma våra omtentor och dränka vår ångest genom en magisk kväll!"
+        		+ "\nInnan Kårallen ska du även föra i Colonia med dina klasskompisar:))))) \nInför kvällen behöver du dricka, förslagsvis Kir"
+        		+ "Kl är 18.40 och du måste skynda dig till systemet innan stägning!!! \\nMen innan du begär dig iväg behöver du klä dig i dit favoritplagg...\\n"
+        		+ "Ovven!! \\nDin korre är stökig och du behöver därför leta runt... Prova komandot 'leta'");
         while (true) {
             String command;
-            
+       
             System.out.println("Vad vill du göra?");
             command = keyboard.nextLine();
             player.doCommand(command);

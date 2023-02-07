@@ -6,6 +6,7 @@ public class Location {
     protected ArrayList<Item> items = new ArrayList<Item>();
     private Boolean visited = false;
     private Location[] paths = new Location[4];
+	private Item requiredItem;
 
     Location(String name, String desc){
         this.Description = desc;
@@ -60,12 +61,33 @@ public class Location {
         
     }
     
+	public void setRequiredItem(Item req) {
+		this.requiredItem = req;
+	}
+	
+	public Item getRequiredItem() {
+		return this.requiredItem;
+	}
+    
+    public Boolean playerHasAccess(ArrayList<Item> Playeritems) {
+    	if (this.requiredItem != null) {    		
+    		if (Playeritems.contains(this.requiredItem)) {
+    			return true;
+    		} else {
+    			return false;
+    		}
+    	} else {
+    		return true;
+    	}
+    }
+    
         
     public Location[] getPaths() {
     	return this.paths;
     }
 
     public Location getPath(String direction){
+    	this.visited = true;
         switch (direction) {
         case "norr":
             return this.paths[0];
@@ -77,7 +99,7 @@ public class Location {
         	return this.paths[3];
         default:
         	return null;
-    }
+        }
     }
    
 }

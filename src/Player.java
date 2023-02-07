@@ -16,6 +16,10 @@ public class Player {
         return this.Name;
     }
     
+    public Location getPosition() {
+    	return this.Position;
+    }
+    
     public void setDrunk(Double db){
         this.drunk += db;
         if (this.drunk <= 0.0) {
@@ -115,40 +119,15 @@ public class Player {
 		}
     }    
     
-    // Snygga till
-    // Komma t colonia: Kir
-    // Komma in på Karallen Alkoholnivå och Ovve
-    
-    
-    public Boolean playerHasAcces(Location newPos) {
-    	
-		if(newPos instanceof Party) {						
-			if (((Party) newPos).getRequiredItem() != null) {			
-				if(((Party) newPos).playerHasItem(this.items)) {
-					return true;
-				} else {
-					return false;
-				}		    	
-			} else {
-				return true;
-			}
-		} else {
-			return true;
-		}
-    }
-    
     void moveTo(String direction){
-    		
+    	
     	if (this.Position.getPath(direction) != null) {   		
-    		if (playerHasAcces(this.Position.getPath(direction))) {
+        	if (this.Position.getPath(direction).playerHasAccess(this.items)) {
         		this.Position = this.Position.getPath(direction);
-        	    System.out.println("Du befinner dig just nu vid " + this.Position.getName() + ", " + this.Position.describeYourself());
-        	    this.Position.setLocToVisited();
-    		} else {
-    			System.out.println("För att få komma till " + this.Position.getPath(direction).getName() + " behöver du " + ((Party) this.Position.getPath(direction)).getRequiredItem().getName());
-    			System.out.println("Du befinner dig just nu vid " + this.Position.getName() + ", " + this.Position.describeYourself());
+        	} else {
+    			System.out.println("För att få komma till " + this.Position.getPath(direction).getName()  + " behöver du " + this.Position.getPath(direction).getRequiredItem().getName());
     		}
-			Party.getMusic(this.Position);
+        	System.out.println("Du befinner dig just nu vid " + this.Position.getName() + ", " + this.Position.describeYourself() + " " + Party.getMusic(Position));
     	} else {
         	System.out.println("Ogiltig riktining");
     	}
