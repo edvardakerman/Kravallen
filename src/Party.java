@@ -12,11 +12,8 @@ class Party extends Location {
 		}
 	}
 	
-	public static String getMusic(Location pos) {
-		if (pos instanceof Party) {
+	public String getMusic() {
 			String Music[] = new String[] { "Mares", "Avicii", "Lov1", "Bolaget" };
-			return (Music[(int) Math.floor(Math.random()*Music.length)] + " spelas högt!!!");
-		}
-		return "";
+			return (Music[(int) Math.floor(Math.random()*Music.length)]);
 	}
 }

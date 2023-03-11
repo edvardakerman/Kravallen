@@ -3,10 +3,8 @@ class Food extends Item {
 			super(name, desc);
 		}
 		
-		@Override
-		public void use(Player player) {
-			player.setDrunk(-(player.getDrunk()/2));
+		public void eat(Player player) {
 			System.out.println("Nom, Nom, Nom! Gott med " + this.getName() + "!!");
-			System.out.println("Din promille ligger nu på " + player.getDrunk());
+			player.removeItem(this);
 		}
 }

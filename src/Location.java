@@ -57,8 +57,7 @@ public class Location {
     		return this.Description.substring(0, index);
     	} else {
     		return this.Description;
-    	}
-        
+    	}   
     }
     
 	public void setRequiredItem(Item req) {
@@ -80,6 +79,59 @@ public class Location {
     		return true;
     	}
     }
+    
+    void takeItem(String Name, Player player){
+        
+    	for (Item item : this.getItems()) {
+    		if (Name.equals(item.getName())) {
+    			player.addItem(item);
+    			System.out.println(item.getName() + " laddes till bland dina saker.");
+    			items.remove(item);
+    			break;
+    		}
+		}
+    }
+    
+    
+    void moveTo(String direction, Player player){
+    	
+    	if (player.getPosition().getPath(direction) != null) {   		
+        	if (player.getPosition().getPath(direction).playerHasAccess(player.getItems())) {
+        		 player.setPosition(player.getPosition().getPath(direction));
+        	} else {
+    			System.out.println("För att få komma till " + player.getPosition().getPath(direction).getName()  + " behöver du " + player.getPosition().getPath(direction).getRequiredItem().getName());
+    		}
+        	System.out.println("Du befinner dig just nu vid " + player.getPosition().getName() + ", " + player.getPosition().describeYourself());
+        	if (player.getPosition() instanceof Party) {
+        		Party p=(Party)player.getPosition();
+        		System.out.println( p.getMusic() + "Spelas högt!!!!");
+        	}
+    	} else {
+        	System.out.println("Ogiltig riktining");
+    	}
+	}
+    
+    
+	public void doCommand(String command, Player player) {
+
+
+		String arr[] = command.split(" ", 2);
+		switch(arr[0]) {
+        case "leta":
+            this.look();
+			break;
+        case "ta":
+            takeItem(arr[1], player);
+			break;
+        case "gå":
+            moveTo(arr[1], player);
+			break;
+		default:
+			break;
+
+
+		}
+	}
     
         
     public Location[] getPaths() {

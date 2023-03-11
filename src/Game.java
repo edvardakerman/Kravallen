@@ -26,12 +26,16 @@ class Game {
 	    // Create Items
 	    Wearable Ovve = new Wearable("Ovve", "Snyggt");
 	    Drink Kir = new Drink("Kir", "Mmm gott med kir");
+	    Drink Beer = new Drink("Bärs", "Bira Bira Bira, Bärs Bärs Bärs!!!");
 	    Food CheeseBurger = new Food("Cheeseburgare", "Världens bästa fyllekäk, har bottat många kommande bakfyllor!!!");
+	    Food Kebab = new Food("Kebab", "Världens bästa fyllekäk, mumma!!!");
 	    	    
 	    // Assign Items to rooms
 	    Ryd.setItem(Ovve);
 	    Systemet.setItem(Kir);
 	    Donken.setItem(CheeseBurger);
+	    Ryd.setItem(Kebab);
+	    Karallen.setItem(Beer);
 	    
 	    // Assign required Items to visit places
 	    Colonia.setRequiredItem(Kir);
@@ -57,7 +61,7 @@ class Game {
        
             System.out.println("Vad vill du göra?");
             command = keyboard.nextLine();
-            player.doCommand(command);
+            player.doCommand2(command);
         }	    
     }
 

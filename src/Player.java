@@ -4,8 +4,7 @@ public class Player {
     private String Name;
     private Location Position;
     private ArrayList<Item> items = new ArrayList<Item>();
-    private double drunk = 0.0;
-    private Boolean wearingOvve = false;
+    private Wearable wearing = null;
     
     Player(String name, Location start){
         this.Name = name;
@@ -20,97 +19,25 @@ public class Player {
     	return this.Position;
     }
     
-    public void setDrunk(Double db){
-        this.drunk += db;
-        if (this.drunk <= 0.0) {
-        	this.drunk = 0.0;
-        }
+	public ArrayList<Item> getItems() {
+		return this.items;
+	}
+    
+    public void setWearing(Wearable clothing) {
+    	this.wearing = clothing;
     }
     
-    public void setOvve() {
-    	this.wearingOvve = true;
+    public Wearable getWearing() {
+    	return this.wearing;
     }
     
-    public Boolean getOvveStatus() {
-    	return this.wearingOvve;
+    public void removeItem(Item item) {
+    	this.items.remove(item);
     }
-    
-    public Double getDrunk() {
-    	return this.drunk;
-    }
-    
-    public void doCommand(String cmd){
-    	String arr[] = cmd.split(" ", 2);
-    	
-    	if (arr.length == 2) {
-            switch (arr[0]) {
-            case "gå":
-                moveTo(arr[1]);
-                break;
-            case "ta":
-                takeItem(arr[1]);
-                break;
-            case "använd":
-                useItem(arr[1]);
-                break;
-            default: 
-                System.out.println("Ogilitigt kommando, skriv 'hjälp' för mer info");
-                break;
-            }           
-    	} else {
-            switch (arr[0]) {
-            case "leta":
-                this.Position.look();
-                break;
-            case "hjälp":
-            	help();
-            	break;
-            case "saker":
-                inventory();
-                break;
-            case "dansa":
-                Party.dance(this.Position);
-                break;
-            default: 
-                System.out.println("Ogilitigt kommando, skriv 'hjälp' för mer info");
-                break;
-            }
-    	}
-    }
-    
-    void help(){
-    	System.out.println("Giltiga Kommandon:");
-    	System.out.println("1. gå      - followed by a direction, east/west/north/south");
-    	System.out.println("2. ta      - followed by a spell, wingardium leviosa");
-    	System.out.println("3. använd  - followed by a wearable item, Cloak of Invisibility");
-    	System.out.println("4. dansa   - Shows what you are currently carring with you");
-    	System.out.println("5. leta	   - Shows whats on your current location");
-    	System.out.println("6. saker   - Shows whats on your current location");
-    }
-    
-    void useItem(String name) {
-    	for (Item item : this.items) {
-    		if (name.equals(item.getName())) {
-    			item.use(this);
-    			if (item instanceof Drink || item instanceof Food) {
-    				this.items.remove(item);
-    			}
-    			break;
-    		}
-		}
-    }
-    
-    void takeItem(String Name){
-    
-    	for (Item item : this.Position.getItems()) {
-    		if (Name.equals(item.getName())) {
-    			this.items.add(item);
-    			System.out.println(item.getName() + " laddes till bland dina saker.");
-    			break;
-    		}
-		}
-    	this.Position.removeItem(this.items.get(this.items.size() - 1));
-    }
+
+    public void addItem(Item item) {
+    	this.items.add(item);
+    };
     
     void inventory(){
     	System.out.println("Dina Saker:");
@@ -119,18 +46,56 @@ public class Player {
 		}
     }    
     
-    void moveTo(String direction){
-    	
-    	if (this.Position.getPath(direction) != null) {   		
-        	if (this.Position.getPath(direction).playerHasAccess(this.items)) {
-        		this.Position = this.Position.getPath(direction);
-        	} else {
-    			System.out.println("För att få komma till " + this.Position.getPath(direction).getName()  + " behöver du " + this.Position.getPath(direction).getRequiredItem().getName());
-    		}
-        	System.out.println("Du befinner dig just nu vid " + this.Position.getName() + ", " + this.Position.describeYourself() + " " + Party.getMusic(Position));
-    	} else {
-        	System.out.println("Ogiltig riktining");
-    	}
+
+    
+    public void setPosition(Location loc) {
+    	this.Position = loc;
+    }
+    
+    
+    
+	public void doCommand2(String command) {
+
+		String arr[] = command.split(" ", 2);
+
+		switch (arr[0]) {
+
+		case "help":
+		   	System.out.println("Giltiga Kommandon:");
+	    	System.out.println("1. gå      - följs av en riktning, gå öst/väst/norr/syd");
+	    	System.out.println("2. ta      - följs av föremål, ta Ovve");
+	    	System.out.println("3. använd  - För att ta på sig kläder, använd Ovve");
+	    	System.out.println("4. ät	   - För att ta äta mat, ät Kebab");
+	    	System.out.println("5. drick   - För att ta dricka, drick Kir");
+	    	System.out.println("6. dansa   - För att dansa om möjligt");
+	    	System.out.println("7. leta	   - För att leta efter föremål");
+	    	System.out.println("8. saker   - För att visa dina föremål");
+			break;
+        case "saker":
+            inventory();
+			break;
+
+
+		default:
+
+			Item temp = null;
+			if (!items.isEmpty()) {
+				for (Item item : items) {
+					if (item != null) {
+						temp = item;
+					}
+				}
+				temp.doCommand(command, this);
+			}
+
+
+			Position.doCommand(command, this);
+			break;
+
+		}
+
+
 	}
+    
     
 }

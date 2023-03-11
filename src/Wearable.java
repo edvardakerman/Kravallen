@@ -4,10 +4,9 @@ class Wearable extends Item {
 		super(name, desc);
 	}
 
-	@Override
-	public void use(Player player) {
-		player.setOvve();
+	public void wear(Player player) {
 		System.out.println("Du är nu klädd i " + this.getName());
+		player.setWearing(this);
 	}
 	
 }
