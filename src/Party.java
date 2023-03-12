@@ -4,12 +4,8 @@ class Party extends Location {
 		super(name, description);
 	}
 
-	public static void dance(Location pos) {
-		if (pos instanceof Party) {
-			System.out.println("CHACHACHA");
-		} else {
-			System.out.println("Du kan inte dansa här:(((((");
-		}
+	public void dance() {
+		System.out.println("CHACHACHA");
 	}
 
 	public String getMusic() {

@@ -112,6 +112,15 @@ public class Location {
 		}
 	}
 
+	public void doDance(Player player) {
+		if (player.getPosition() instanceof Party) {
+			Party p = (Party) player.getPosition();
+			p.dance();
+		} else {
+			System.out.println("Du kan inte dansa utan music :((");
+		}
+	}
+
 	public void doCommand(String command, Player player) {
 
 		String arr[] = command.split(" ", 2);
@@ -121,7 +130,7 @@ public class Location {
 			this.look();
 			break;
 		case "dansa":
-			Party.dance(player.getPosition());
+			this.doDance(player);
 			break;
 		case "ta":
 			if (arr.length == 2) {

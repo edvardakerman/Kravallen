@@ -67,7 +67,7 @@ class Game {
 
 			System.out.println("Vad vill du göra?");
 			command = keyboard.nextLine();
-			player.doCommand2(command);
+			player.doCommand(command);
 		}
 	}
 

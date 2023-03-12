@@ -50,7 +50,7 @@ public class Player {
 		this.Position = loc;
 	}
 
-	public void doCommand2(String command) {
+	public void doCommand(String command) {
 
 		String arr[] = command.split(" ", 2);
 
