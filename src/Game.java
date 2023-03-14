@@ -62,6 +62,8 @@ class Game {
 						+ "\nInnan Kårallen ska du även föra i Colonia med dina klasskompisar:))))) \nInför kvällen behöver du dricka, förslagsvis Kir"
 						+ "Kl är 18.40 och du måste skynda dig till systemet innan stägning!!! \\nMen innan du begär dig iväg behöver du klä dig i dit favoritplagg...\\n"
 						+ "Ovven!! \\nDin korre är stökig och du behöver därför leta runt... Prova komandot 'leta'");
+		player.getPosition().directionDesc(player.getPosition());
+		
 		while (true) {
 			String command;
 

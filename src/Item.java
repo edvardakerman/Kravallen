@@ -65,5 +65,6 @@ abstract class Item {
 	public void drink(Player player) {
 		// something
 	};
+	
 
 }

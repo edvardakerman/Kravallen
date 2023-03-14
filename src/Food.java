@@ -7,5 +7,7 @@ class Food extends Item {
 		System.out.println("Nom, Nom, Nom! Gott med " + this.getName() + "!!");
 		System.out.println(this.getDesc());
 		player.removeItem(this);
+		player.setDrunk(-0.5);
+		player.howDrunk();
 	}
 }

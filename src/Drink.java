@@ -7,6 +7,8 @@ class Drink extends Item {
 		System.out.println("Du dricker " + this.getName() + "!!");
 		System.out.println(this.getDesc() + "!!");
 		player.removeItem(this);
+		player.setDrunk(0.5);
+		player.howDrunk();
 	}
 
 }

@@ -91,6 +91,21 @@ public class Location {
 			}
 		}
 	}
+	
+	void directionDesc(Location loc) {
+		
+		String directions[] = new String[] { "norr", "öst", "syd", "väst" };
+		
+		System.out.println("Från " + loc.getName() + " kan du gå åt följande riktningar:");
+		for (int i=0; i<loc.paths.length; i++)
+		{ 
+			if (loc.getPath(directions[i]) != null) {
+				System.out.println("Till " + directions[i] + " finns " + loc.paths[i].getName());
+			}
+		}
+	}
+	
+	
 
 	void moveTo(String direction, Player player) {
 
@@ -110,6 +125,7 @@ public class Location {
 		} else {
 			System.out.println("Ogiltig riktining");
 		}
+		directionDesc(player.getPosition());
 	}
 
 	public void doDance(Player player) {

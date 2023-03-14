@@ -5,11 +5,27 @@ public class Player {
 	private Location Position;
 	private ArrayList<Item> items = new ArrayList<Item>();
 	private Wearable wearing = null;
+	private double drunklevel = 0.0;
 
 	Player(String name, Location start) {
 		this.Name = name;
 		this.Position = start;
 	}
+	
+	public double getDrunk() {
+		return this.drunklevel;
+	}
+	
+	public void setDrunk(double newdrunk) {
+		if ((this.drunklevel + newdrunk) >= 0) {
+			this.drunklevel += newdrunk;
+		}
+	}
+	
+	public void howDrunk() {
+		System.out.println("Din promille ligger på: " + this.getDrunk());
+	}
+
 
 	public String getName() {
 		return this.Name;
