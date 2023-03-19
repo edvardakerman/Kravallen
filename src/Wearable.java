@@ -1,7 +1,20 @@
-class Wearable extends Item {
+public class Wearable extends Item {
 
 	Wearable(String name, String desc) {
 		super(name, desc);
+	}
+	
+	public void use(String command, Player player)
+	{	
+		
+		switch (command) {
+		case "använd":
+			wear(player);
+			break;
+		default:
+			break;
+		}
+		
 	}
 
 	public void wear(Player player) {

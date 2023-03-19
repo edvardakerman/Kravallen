@@ -1,6 +1,10 @@
-class Party extends Location {
+import java.util.ArrayList;
+import java.util.Random;
 
-	Party(String name, String description) {
+public class Party extends Location {
+	private ArrayList<String> music = new ArrayList<String>();
+
+	public Party(String name, String description) {
 		super(name, description);
 	}
 
@@ -8,8 +12,22 @@ class Party extends Location {
 		System.out.println("CHACHACHA");
 	}
 
-	public String getMusic() {
-		String Music[] = new String[] { "Mares", "Avicii", "Lov1", "Bolaget" };
-		return (Music[(int) Math.floor(Math.random() * Music.length)]);
+	public void setMusic(String newMusic) {
+		music.add(newMusic);
+	}
+
+	public ArrayList<String> getMusic() {
+		return this.music;
+	}
+
+	public String shuffleMusic() {
+		Random rnd = new Random();
+		return music.get(rnd.nextInt(music.size()));
+	}
+
+	@Override
+	public void describeYourself() {
+		super.describeYourself();
+		System.out.println(shuffleMusic() + " Spelas högt!!!!");
 	}
 }

@@ -1,38 +1,42 @@
 import java.util.ArrayList;
 
 public class Player {
-	private String Name;
-	private Location Position;
+	private String name;
+	private Location position;
 	private ArrayList<Item> items = new ArrayList<Item>();
 	private Wearable wearing = null;
 	private double drunklevel = 0.0;
 
-	Player(String name, Location start) {
-		this.Name = name;
-		this.Position = start;
+	public Player(String name, Location start) {
+		this.name = name;
+		this.position = start;
 	}
-	
+
 	public double getDrunk() {
 		return this.drunklevel;
 	}
-	
+
 	public void setDrunk(double newdrunk) {
 		if ((this.drunklevel + newdrunk) >= 0) {
 			this.drunklevel += newdrunk;
 		}
 	}
-	
+
 	public void howDrunk() {
-		System.out.println("Din promille ligger på: " + this.getDrunk());
+
+		if (this.getDrunk() >= 1.5) {
+			System.out.println("Ta ett varv, din promille ligger på: " + this.getDrunk() + ", dags att gå hem!!!");
+		} else {
+			System.out.println("Din promille ligger på: " + this.getDrunk());
+		}
 	}
 
-
 	public String getName() {
-		return this.Name;
+		return this.name;
 	}
 
 	public Location getPosition() {
-		return this.Position;
+		return this.position;
 	}
 
 	public ArrayList<Item> getItems() {
@@ -63,7 +67,7 @@ public class Player {
 	}
 
 	public void setPosition(Location loc) {
-		this.Position = loc;
+		this.position = loc;
 	}
 
 	public void doCommand(String command) {
@@ -72,7 +76,7 @@ public class Player {
 
 		switch (arr[0]) {
 
-		case "help":
+		case "hjälp":
 			System.out.println("Giltiga Kommandon:");
 			System.out.println("1. gå      - följs av en riktning, gå öst/väst/norr/syd");
 			System.out.println("2. ta      - följs av föremål, ta Ovve");
@@ -86,7 +90,7 @@ public class Player {
 		case "saker":
 			inventory();
 			break;
-
+			
 		default:
 
 			Item temp = null;
@@ -99,7 +103,7 @@ public class Player {
 				temp.doCommand(command, this);
 			}
 
-			Position.doCommand(command, this);
+			position.doCommand(command, this);
 			break;
 
 		}

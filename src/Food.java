@@ -1,6 +1,18 @@
-class Food extends Item {
-	Food(String name, String desc) {
+public class Food extends Item {
+	public Food(String name, String desc) {
 		super(name, desc);
+	}
+
+	public void use(String command, Player player) {
+
+		switch (command) {
+		case "ät":
+			eat(player);
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	public void eat(Player player) {

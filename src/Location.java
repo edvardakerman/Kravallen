@@ -1,16 +1,21 @@
 import java.util.*;
 
+// TODO: There shall be at least two subclasses to Location (you may
+// use OutdoorsArea and Room from the example if you like). These
+// subclasses should add new functionality.
+
+// There are two subclasses to Location called Party and Store, they both add new functionality.
 public class Location {
-	private String Name;
-	private String Description;
-	protected ArrayList<Item> items = new ArrayList<Item>();
+	private String name;
+	private String description;
+	private ArrayList<Item> items = new ArrayList<Item>();
 	private Boolean visited = false;
 	private Location[] paths = new Location[4];
 	private Item requiredItem;
 
-	Location(String name, String desc) {
-		this.Description = desc;
-		this.Name = name;
+	public Location(String name, String desc) {
+		this.description = desc;
+		this.name = name;
 	}
 
 	public void setPaths(Location north, Location east, Location south, Location west) {
@@ -21,7 +26,7 @@ public class Location {
 	}
 
 	public String getName() {
-		return this.Name;
+		return this.name;
 	}
 
 	public void setLocToVisited() {
@@ -51,12 +56,15 @@ public class Location {
 		return this.items;
 	}
 
-	public String describeYourself() {
-		int index = this.Description.indexOf(",");
+	public void describeYourself() {
+		int index = this.description.indexOf(",");
+
+		System.out.println("Du befinner dig just nu vid " + getName() + ", ");
+
 		if (this.visited) {
-			return this.Description.substring(0, index);
+			System.out.println(this.description.substring(0, index));
 		} else {
-			return this.Description;
+			System.out.println(this.description);
 		}
 	}
 
@@ -68,9 +76,9 @@ public class Location {
 		return this.requiredItem;
 	}
 
-	public Boolean playerHasAccess(ArrayList<Item> Playeritems) {
+	public Boolean playerHasAccess(ArrayList<Item> playerItems) {
 		if (this.requiredItem != null) {
-			if (Playeritems.contains(this.requiredItem)) {
+			if (playerItems.contains(this.requiredItem)) {
 				return true;
 			} else {
 				return false;
@@ -80,32 +88,29 @@ public class Location {
 		}
 	}
 
-	void takeItem(String Name, Player player) {
+	public void takeItem(String name, Player player) {
 
 		for (Item item : this.getItems()) {
-			if (Name.equals(item.getName())) {
+			if (name.equals(item.getName())) {
 				player.addItem(item);
 				System.out.println(item.getName() + " laddes till bland dina saker.");
-				items.remove(item);
+				removeItem(item);
 				break;
 			}
 		}
 	}
-	
+
 	void directionDesc(Location loc) {
-		
+
 		String directions[] = new String[] { "norr", "öst", "syd", "väst" };
-		
+
 		System.out.println("Från " + loc.getName() + " kan du gå åt följande riktningar:");
-		for (int i=0; i<loc.paths.length; i++)
-		{ 
+		for (int i = 0; i < loc.paths.length; i++) {
 			if (loc.getPath(directions[i]) != null) {
 				System.out.println("Till " + directions[i] + " finns " + loc.paths[i].getName());
 			}
 		}
 	}
-	
-	
 
 	void moveTo(String direction, Player player) {
 
@@ -116,12 +121,7 @@ public class Location {
 				System.out.println("För att få komma till " + player.getPosition().getPath(direction).getName()
 						+ " behöver du " + player.getPosition().getPath(direction).getRequiredItem().getName());
 			}
-			System.out.println("Du befinner dig just nu vid " + player.getPosition().getName() + ", "
-					+ player.getPosition().describeYourself());
-			if (player.getPosition() instanceof Party) {
-				Party p = (Party) player.getPosition();
-				System.out.println(p.getMusic() + " Spelas högt!!!!");
-			}
+			player.getPosition().describeYourself();
 		} else {
 			System.out.println("Ogiltig riktining");
 		}

@@ -1,49 +1,10 @@
-abstract class Item {
+public abstract class Item {
 	private String name;
 	private String description;
 
-	Item(String Name, String Description) {
-		this.name = Name;
-		this.description = Description;
-	}
-
-	public void doCommand(String command, Player player) {
-
-		String arr[] = command.split(" ", 2);
-		switch (arr[0]) {
-		case "använd":
-			if (checkItems(arr[1], player) instanceof Wearable) {
-				wear(player);
-			}
-			;
-			break;
-		case "ät":
-			if (checkItems(arr[1], player) instanceof Food) {
-				eat(player);
-			}
-			break;
-		case "drick":
-			if (checkItems(arr[1], player) instanceof Drink) {
-				drink(player);
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
-	public Item checkItems(String name, Player player) {
-		Item temp = null;
-
-		for (Item item : player.getItems()) {
-			if (name.equals(item.getName())) {
-				temp = item;
-				break;
-			}
-		}
-
-		return temp;
-
+	public Item(String name, String description) {
+		this.name = name;
+		this.description = description;
 	}
 
 	public String getName() {
@@ -54,17 +15,18 @@ abstract class Item {
 		return this.description;
 	}
 
-	public void wear(Player player) {
-		// something
-	};
+	public abstract void use(String command, Player player);
 
-	public void eat(Player player) {
-		// something
-	};
+	public void doCommand(String command, Player player) {
+		String arr[] = command.split(" ", 2);
 
-	public void drink(Player player) {
-		// something
-	};
-	
+		for (Item item : player.getItems()) {
+			if (arr[1].equals(item.getName())) {
+				item.use(arr[0], player);
+				break;
+			}
+		}
+
+	}
 
 }

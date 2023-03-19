@@ -1,6 +1,18 @@
-class Drink extends Item {
-	Drink(String name, String desc) {
+public class Drink extends Item {
+	public Drink(String name, String desc) {
 		super(name, desc);
+	}
+
+	public void use(String command, Player player) {
+
+		switch (command) {
+		case "drick":
+			drink(player);
+			break;
+		default:
+			break;
+		}
+
 	}
 
 	public void drink(Player player) {
